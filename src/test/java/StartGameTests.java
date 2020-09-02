@@ -4,16 +4,10 @@ import static org.junit.Assert.*;
 
 public class StartGameTest {
 
-    private StartGame startGame;
-
-    @Before
-    public void setUp() {
-        startGame = new StartGame();
-        startGame.createSquads();
-    }
-
     @Test
     public void shouldBeCreatedTwoSquadsOfOppositeFactions() {
+        startGame = new StartGame();
+        startGame.createSquads();
         Fraction expectedFraction;
 
         if (startGame.getSquad(1).getFraction() == Fraction.FRACTION1) {
@@ -26,12 +20,16 @@ public class StartGameTest {
 
     @Test
     public void theSquadShouldHaveEightCharacters() {
+        startGame = new StartGame();
+        startGame.createSquads();
         assertEquals(8, startGame.getSquad(1).size());
         assertEquals(8, startGame.getSquad(2).size());
     }
 
     @Test
     public void sortingSquadByPrivileges() {
+        startGame = new StartGame();
+        startGame.createSquads();
         Squad squad = startGame.getSquad(1);
         squad.getCharacter(7).setPrivileged();
         squad.sortByPrivileges();
@@ -40,6 +38,8 @@ public class StartGameTest {
 
     @Test
     public void oneSquadShouldRemainAfterTheBattle() {
+        startGame = new StartGame();
+        startGame.createSquads();
         startGame.startFight();
         if (startGame.getSquad(1).size() > 0) {
             assertEquals(0, startGame.getSquad(2).size());
@@ -50,6 +50,8 @@ public class StartGameTest {
 
     @Test
     public void checkingLogWritingToFile() {
+        startGame = new StartGame();
+        startGame.createSquads();
         startGame.startFight();
         Log.saveLogToDisk();
         assertEquals(Log.getLog(), Log.getFromFile);
